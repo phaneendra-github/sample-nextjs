@@ -23,8 +23,6 @@
                         echo 'Buid Docker Image'
                         pwd
                         docker build -t hh-ui-nodejs:${BUILD_NUMBER} .
-
-                        '''
                     }
                 }
             }
@@ -37,6 +35,7 @@
                             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 628976729859.dkr.ecr.us-east-1.amazonaws.com
                             docker tag hh-ui-nodejs:${BUILD_NUMBER} 628976729859.dkr.ecr.us-east-1.amazonaws.com/sampleecsjenkins:v${BUILD_NUMBER}
                             docker push 628976729859.dkr.ecr.us-east-1.amazonaws.com/sampleecsjenkins:v${BUILD_NUMBER}
+
                             '''
                         
                     }
