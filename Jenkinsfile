@@ -23,7 +23,6 @@
                         echo 'Buid Docker Image'
                         pwd
                         docker build -t hh-ui-nodejs:${BUILD_NUMBER} .
-
                         '''
                     }
                 }
