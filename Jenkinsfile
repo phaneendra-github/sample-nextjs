@@ -31,13 +31,13 @@
             stage('Push the image'){
             steps{
                     script{
-                        
-                            sh '''                                                                    
-                            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 628976729859.dkr.ecr.us-east-1.amazonaws.com
-                            docker tag hh-ui-nodejs:${BUILD_NUMBER} 628976729859.dkr.ecr.us-east-1.amazonaws.com/sampleecsjenkins:v${BUILD_NUMBER}
-                            docker push 628976729859.dkr.ecr.us-east-1.amazonaws.com/sampleecsjenkins:v${BUILD_NUMBER}
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Karthi-personal-AWS-key', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                            sh '''
+                                aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 628976729859.dkr.ecr.us-east-1.amazonaws.com
+                                docker tag hh-ui-nodejs:${BUILD_NUMBER} 628976729859.dkr.ecr.us-east-1.amazonaws.com/sampleecsjenkins:v${BUILD_NUMBER}
+                                docker push 628976729859.dkr.ecr.us-east-1.amazonaws.com/sampleecsjenkins:v${BUILD_NUMBER}
                             '''
-                        
+                        }
                     }
                 }
             }     
